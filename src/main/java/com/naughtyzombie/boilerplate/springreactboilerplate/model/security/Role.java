@@ -1,5 +1,6 @@
 package com.naughtyzombie.boilerplate.springreactboilerplate.model.security;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;

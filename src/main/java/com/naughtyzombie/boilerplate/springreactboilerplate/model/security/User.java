@@ -1,6 +1,7 @@
 package com.naughtyzombie.boilerplate.springreactboilerplate.model.security;
 
 import lombok.Data;
+import com.naughtyzombie.boilerplate.springreactboilerplate.model.Bookmark;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,6 +9,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "user")
@@ -50,15 +53,27 @@ public class User {
     @NotNull
     private Boolean enabled;
 
+    @Column(name = "CREATEDAT")
+    @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
+    private Date createdAt;
+    
+    @Column(name = "COUNTRYCODE", length = 50)
+    @NotNull
+    @Size(min = 4, max = 50)
+    private Long countryCode;
+    
     @Column(name = "LASTPASSWORDRESETDATE")
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull
     private Date lastPasswordResetDate;
 
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
     private List<Role> roles;
+
 }
